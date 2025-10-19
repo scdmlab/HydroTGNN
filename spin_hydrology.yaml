@@ -1,0 +1,31 @@
+##########################        SPIN CONFIG        ##########################
+defaults:
+  - default
+  - _self_
+
+dataset:
+  name: hydrology
+  adj_matrix_path: "E:/WISC/2025/GNN Hydrology/tsl-main/IJCNN/adj_matrix.csv"  # 添加绝对路径
+  discharge_data_path: "E:/WISC/2025/GNN Hydrology/tsl-main/IJCNN/merged_discharge_data.csv"  # 添加绝对路径
+  splitting:
+    val_len: 0.1
+    test_len: 0.2
+  connectivity:
+    method: distance
+    threshold: 0.1
+    include_self: false
+    layout: edge_index
+
+model:
+  name: spin
+  hparams:
+    hidden_size: 32
+    eta: 3
+    n_layers: 4
+    message_layers: 1
+    temporal_self_attention: True
+    reweigh: 'softmax'
+
+# 为水文数据调整的参数
+epochs: 10
+batch_size: 4
